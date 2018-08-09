@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.boliangshenghe.weibodata.repository.WeiboLonlatMapper" >
+  <resultMap id="BaseResultMap" type="com.boliangshenghe.weibodata.entity.WeiboLonlat" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="weiboid" property="weiboid" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="coordinate" property="coordinate" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="opertime" property="opertime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, weiboid, uid, coordinate, longitude, latitude, createtime, opertime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from weibo_lonlat
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from weibo_lonlat
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+   <delete id="deleteByUid" parameterType="java.lang.String" >
+    delete from weibo_lonlat
+    where uid = #{uid,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.boliangshenghe.weibodata.entity.WeiboLonlat" >
+    insert into weibo_lonlat (id, weiboid, uid, 
+      coordinate, longitude, latitude, 
+      createtime, opertime)
+    values (#{id,jdbcType=INTEGER}, #{weiboid,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, 
+      #{coordinate,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{opertime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.boliangshenghe.weibodata.entity.WeiboLonlat" >
+    insert into weibo_lonlat
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="weiboid != null" >
+        weiboid,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="coordinate != null" >
+        coordinate,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="opertime != null" >
+        opertime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="weiboid != null" >
+        #{weiboid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="coordinate != null" >
+        #{coordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opertime != null" >
+        #{opertime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.boliangshenghe.weibodata.entity.WeiboLonlat" >
+    update weibo_lonlat
+    <set >
+      <if test="weiboid != null" >
+        weiboid = #{weiboid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="coordinate != null" >
+        coordinate = #{coordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opertime != null" >
+        opertime = #{opertime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.boliangshenghe.weibodata.entity.WeiboLonlat" >
+    update weibo_lonlat
+    set weiboid = #{weiboid,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=VARCHAR},
+      coordinate = #{coordinate,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      opertime = #{opertime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectWeiboLonlatList" resultMap="BaseResultMap"  parameterType="com.boliangshenghe.weibodata.entity.WeiboLonlat">
+   	    select 
+    <include refid="Base_Column_List" />
+    from weibo_lonlat
+    	ORDER BY uid
+   	    <if test="start != null and limit != null"> 
+			LIMIT #{start} ,#{limit}
+		</if>
+   	</select>
+</mapper>

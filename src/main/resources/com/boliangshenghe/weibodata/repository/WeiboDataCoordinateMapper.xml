@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.boliangshenghe.weibodata.repository.WeiboDataCoordinateMapper" >
+  <resultMap id="BaseResultMap" type="com.boliangshenghe.weibodata.entity.WeiboDataCoordinate" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="weibo_id" property="weiboId" jdbcType="VARCHAR" />
+    <result column="coordinate" property="coordinate" jdbcType="VARCHAR" />
+    <result column="weibo_img" property="weiboImg" jdbcType="VARCHAR" />
+    <result column="weibo_video" property="weiboVideo" jdbcType="VARCHAR" />
+    <result column="repost_num" property="repostNum" jdbcType="INTEGER" />
+    <result column="comment_num" property="commentNum" jdbcType="INTEGER" />
+    <result column="praise_num" property="praiseNum" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="is_origin" property="isOrigin" jdbcType="INTEGER" />
+    <result column="device" property="device" jdbcType="VARCHAR" />
+    <result column="weibo_url" property="weiboUrl" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="comment_crawled" property="commentCrawled" jdbcType="INTEGER" />
+    <result column="repost_crawled" property="repostCrawled" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.boliangshenghe.weibodata.entity.WeiboDataCoordinate" extends="BaseResultMap" >
+    <result column="weibo_cont" property="weiboCont" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, weibo_id, coordinate, weibo_img, weibo_video, repost_num, comment_num, praise_num, 
+    uid, is_origin, device, weibo_url, create_time, comment_crawled, repost_crawled
+  </sql>
+  <sql id="Blob_Column_List" >
+    weibo_cont
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from weibo_data_coordinate
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from weibo_data_coordinate
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.boliangshenghe.weibodata.entity.WeiboDataCoordinate" >
+    insert into weibo_data_coordinate (id, weibo_id, coordinate, 
+      weibo_img, weibo_video, repost_num, 
+      comment_num, praise_num, uid, 
+      is_origin, device, weibo_url, 
+      create_time, comment_crawled, repost_crawled, 
+      weibo_cont)
+    values (#{id,jdbcType=INTEGER}, #{weiboId,jdbcType=VARCHAR}, #{coordinate,jdbcType=VARCHAR}, 
+      #{weiboImg,jdbcType=VARCHAR}, #{weiboVideo,jdbcType=VARCHAR}, #{repostNum,jdbcType=INTEGER}, 
+      #{commentNum,jdbcType=INTEGER}, #{praiseNum,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, 
+      #{isOrigin,jdbcType=INTEGER}, #{device,jdbcType=VARCHAR}, #{weiboUrl,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{commentCrawled,jdbcType=INTEGER}, #{repostCrawled,jdbcType=INTEGER}, 
+      #{weiboCont,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.boliangshenghe.weibodata.entity.WeiboDataCoordinate" >
+    insert into weibo_data_coordinate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="weiboId != null" >
+        weibo_id,
+      </if>
+      <if test="coordinate != null" >
+        coordinate,
+      </if>
+      <if test="weiboImg != null" >
+        weibo_img,
+      </if>
+      <if test="weiboVideo != null" >
+        weibo_video,
+      </if>
+      <if test="repostNum != null" >
+        repost_num,
+      </if>
+      <if test="commentNum != null" >
+        comment_num,
+      </if>
+      <if test="praiseNum != null" >
+        praise_num,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="isOrigin != null" >
+        is_origin,
+      </if>
+      <if test="device != null" >
+        device,
+      </if>
+      <if test="weiboUrl != null" >
+        weibo_url,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="commentCrawled != null" >
+        comment_crawled,
+      </if>
+      <if test="repostCrawled != null" >
+        repost_crawled,
+      </if>
+      <if test="weiboCont != null" >
+        weibo_cont,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="weiboId != null" >
+        #{weiboId,jdbcType=VARCHAR},
+      </if>
+      <if test="coordinate != null" >
+        #{coordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="weiboImg != null" >
+        #{weiboImg,jdbcType=VARCHAR},
+      </if>
+      <if test="weiboVideo != null" >
+        #{weiboVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="repostNum != null" >
+        #{repostNum,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null" >
+        #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="praiseNum != null" >
+        #{praiseNum,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="isOrigin != null" >
+        #{isOrigin,jdbcType=INTEGER},
+      </if>
+      <if test="device != null" >
+        #{device,jdbcType=VARCHAR},
+      </if>
+      <if test="weiboUrl != null" >
+        #{weiboUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="commentCrawled != null" >
+        #{commentCrawled,jdbcType=INTEGER},
+      </if>
+      <if test="repostCrawled != null" >
+        #{repostCrawled,jdbcType=INTEGER},
+      </if>
+      <if test="weiboCont != null" >
+        #{weiboCont,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.boliangshenghe.weibodata.entity.WeiboDataCoordinate" >
+    update weibo_data_coordinate
+    <set >
+      <if test="weiboId != null" >
+        weibo_id = #{weiboId,jdbcType=VARCHAR},
+      </if>
+      <if test="coordinate != null" >
+        coordinate = #{coordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="weiboImg != null" >
+        weibo_img = #{weiboImg,jdbcType=VARCHAR},
+      </if>
+      <if test="weiboVideo != null" >
+        weibo_video = #{weiboVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="repostNum != null" >
+        repost_num = #{repostNum,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null" >
+        comment_num = #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="praiseNum != null" >
+        praise_num = #{praiseNum,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="isOrigin != null" >
+        is_origin = #{isOrigin,jdbcType=INTEGER},
+      </if>
+      <if test="device != null" >
+        device = #{device,jdbcType=VARCHAR},
+      </if>
+      <if test="weiboUrl != null" >
+        weibo_url = #{weiboUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="commentCrawled != null" >
+        comment_crawled = #{commentCrawled,jdbcType=INTEGER},
+      </if>
+      <if test="repostCrawled != null" >
+        repost_crawled = #{repostCrawled,jdbcType=INTEGER},
+      </if>
+      <if test="weiboCont != null" >
+        weibo_cont = #{weiboCont,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.boliangshenghe.weibodata.entity.WeiboDataCoordinate" >
+    update weibo_data_coordinate
+    set weibo_id = #{weiboId,jdbcType=VARCHAR},
+      coordinate = #{coordinate,jdbcType=VARCHAR},
+      weibo_img = #{weiboImg,jdbcType=VARCHAR},
+      weibo_video = #{weiboVideo,jdbcType=VARCHAR},
+      repost_num = #{repostNum,jdbcType=INTEGER},
+      comment_num = #{commentNum,jdbcType=INTEGER},
+      praise_num = #{praiseNum,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=VARCHAR},
+      is_origin = #{isOrigin,jdbcType=INTEGER},
+      device = #{device,jdbcType=VARCHAR},
+      weibo_url = #{weiboUrl,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      comment_crawled = #{commentCrawled,jdbcType=INTEGER},
+      repost_crawled = #{repostCrawled,jdbcType=INTEGER},
+      weibo_cont = #{weiboCont,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.boliangshenghe.weibodata.entity.WeiboDataCoordinate" >
+    update weibo_data_coordinate
+    set weibo_id = #{weiboId,jdbcType=VARCHAR},
+      coordinate = #{coordinate,jdbcType=VARCHAR},
+      weibo_img = #{weiboImg,jdbcType=VARCHAR},
+      weibo_video = #{weiboVideo,jdbcType=VARCHAR},
+      repost_num = #{repostNum,jdbcType=INTEGER},
+      comment_num = #{commentNum,jdbcType=INTEGER},
+      praise_num = #{praiseNum,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=VARCHAR},
+      is_origin = #{isOrigin,jdbcType=INTEGER},
+      device = #{device,jdbcType=VARCHAR},
+      weibo_url = #{weiboUrl,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      comment_crawled = #{commentCrawled,jdbcType=INTEGER},
+      repost_crawled = #{repostCrawled,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectWeiboDataCoordinateList" resultMap="BaseResultMap"  parameterType="com.boliangshenghe.weibodata.entity.WeiboDataCoordinate">
+   	    select 
+   DISTINCT uid,coordinate
+    from weibo_data_coordinate
+    <where>
+       coordinate !=''
+    </where>
+    	ORDER BY uid
+   	    <if test="start != null and limit != null"> 
+			LIMIT #{start} ,#{limit}
+		</if>
+   	</select>
+</mapper>
